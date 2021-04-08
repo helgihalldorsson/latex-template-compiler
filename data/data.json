@@ -1,0 +1,11 @@
+{
+	"data": [
+		"ABC", 
+		"DEF", 
+		"GHI", 
+		{
+			"amount": "0 ISK",
+			"discount": "-5%"
+		}
+	]
+}

@@ -34,91 +34,50 @@ namespace latex.template.Model
     {
         public override bool CanConvert(Type objectType)
         {
-            if (objectType == typeof(Node))
-            {
-                return true;
-            }
-            if (objectType == typeof(string))
-            {
-                return true;
-            }
-            if (objectType == typeof(Dictionary<string, Node>))
-            {
-                return true;
-            }
-            if (objectType == typeof(List<Node>))
-            {
-                return true;
-            }
-            return false;
+            return objectType == typeof(Node);
         }
         
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            if(objectType == typeof(string))
-            {
-                JToken token = JToken.ReadFrom(reader);
-                return ReadAsString(token);
-            }
-            else if (objectType == typeof(Dictionary<string, Node>))
-            {                
-                JToken token = JToken.ReadFrom(reader);
-                return ReadAsDictionary(token, serializer);
-            }
-            else if(objectType == typeof(List<Node>))
-            {
-                JToken token = JToken.ReadFrom(reader);
-                return ReadAsList(token, serializer);
-            }
-            else if(objectType == typeof(Node))
-            {
-                JToken token = JToken.ReadFrom(reader);
-                return ReadAsNode(token, serializer);
-
-            }
-
-            throw new JsonSerializationException("Unexpected JSON format encountered in NodeConverter");            
-        }
-        private Node ReadAsNode(JToken token, JsonSerializer serializer)
-        {
+            JToken token = JToken.ReadFrom(reader);
+            
             if(token.Type == JTokenType.String)
             {
                 return new Node(token.ToString());
             }
-            else
+            else if(token.Type == JTokenType.Object)
+            {   
+                Console.WriteLine("");
+                return ReadFromDictionary(token, serializer);
+            }
+            else if(token.Type == JTokenType.Array)
             {
                 Console.WriteLine("");
+                return ReadFromList(token, serializer);
             }
-            return new Node("");
+            return null;
         }
-        private Node ReadAsString(JToken token)
-        {
-            Console.WriteLine("");
-            return new Node("");
-        }
-
-        private Node ReadAsDictionary(JToken token, JsonSerializer serializer)
+        
+        private Node ReadFromDictionary(JToken token, JsonSerializer serializer)
         {
             var dict = new Dictionary<string, Node>();
             foreach(JToken child in token.Children())
             {
-                string path = child.Path;
-                Node node = child.First.ToObject<Node>(serializer);
-                dict.Add(path, node);
-                Console.WriteLine();
+                dict.Add(child.Path, child.First.ToObject<Node>(serializer));
             }
             return new Node(dict);
         }
 
-        private Node ReadAsList(JToken token, JsonSerializer serializer)
+        private Node ReadFromList(JToken token, JsonSerializer serializer)
         {
             var list = new List<Node>();
             foreach (JToken child in token.Children())
             {
-                Console.WriteLine();
+                list.Add(child.ToObject<Node>(serializer));
             }
             return new Node(list);
         }
+
 
         public override bool CanWrite => false;
 
