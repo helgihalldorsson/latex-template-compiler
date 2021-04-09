@@ -1,0 +1,29 @@
+{
+	"data": {
+		"alpha": [
+			"ABC",
+			"DEF",
+			"GHI"
+		],
+		"beta": "X"
+	}
+}
+
+
+Data:
+	Alpha:
+		<:alpha::><>,<>
+			(<:alpha:>)
+		<::alpha:>
+	Beta:
+		<:beta:>
+			
+Ætti að verða:
+
+Data:
+	Alpha:
+		(ABC),
+		(DEF),
+		(GHI)
+	Beta:
+		X

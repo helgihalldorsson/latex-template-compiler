@@ -1,11 +1,10 @@
 {
-	"data": [
-		"ABC", 
-		"DEF", 
-		"GHI", 
-		{
-			"amount": "0 ISK",
-			"discount": "-5%"
-		}
-	]
+	"data": {
+		"alpha": [
+			"ABC",
+			"DEF",
+			"GHI"
+		],
+		"beta": "X"
+	}
 }

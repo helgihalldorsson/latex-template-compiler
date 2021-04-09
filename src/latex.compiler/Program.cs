@@ -1,5 +1,5 @@
 ﻿using latex.template;
-using latex.template.Model;
+using latex.template.data;
 using System;
 using System.IO;
 
@@ -9,8 +9,12 @@ namespace latex.compiler
     {
         static void Main(string[] args)
         {
-            Root data = TemplateData.ReadFile(@"D:\Code\latex-template-compiler\data\data.json");
-            Console.WriteLine();
+            string json = File.ReadAllText(@"D:\Code\latex-template-compiler\data\data.json");
+            string template = File.ReadAllText(@"D:\Code\latex-template-compiler\data\template.txt");
+
+            TemplateData data = TemplateData.Deserialize(json);
+            string result = data.FillTemplate(template);
+            Console.WriteLine("");
         }
     }
 }
