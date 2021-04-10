@@ -1,4 +1,4 @@
-﻿using latex.template.data.Nodes;
+﻿using template.data.Nodes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace latex.template.data
+namespace template.data
 {
     public class NodeConverter : JsonConverter
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace latex.template.data.Nodes
+namespace template.data.Nodes
 {
     public class ListNode : INode
     {
@@ -107,6 +107,18 @@ namespace latex.template.data.Nodes
             }
 
             return new Tuple<string, string, string, string>(frontPart, latexTemplate, backPart, divider);
+        }
+
+        private Tuple<string, string, string> SplitStringIntoParts(string template, string tagStart, string tagEnd)
+        {
+            int begin = template.IndexOf(tagStart);
+            int end = template.IndexOf(tagEnd);
+
+            string frontPart = template.Substring(0, begin);
+            string backPart = template.Substring(end + tagEnd.Length);
+            template = template.Substring(begin + tagStart.Length, end - (begin + tagStart.Length));
+
+            return new Tuple<string, string, string>(frontPart, template, backPart);
         }
     }
 }

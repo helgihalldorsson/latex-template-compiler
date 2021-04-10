@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace latex.template.data.Nodes
+namespace template.data.Nodes
 {
     public class StringNode : INode
     {

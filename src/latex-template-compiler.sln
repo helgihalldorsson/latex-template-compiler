@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "latex.compiler", "latex.compiler\latex.compiler.csproj", "{7CB776B9-D565-46B0-BFE5-3BC612F2FFB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "latex.template.data", "latex.template.data\latex.template.data.csproj", "{6AAB8AA9-A96A-44D8-9073-9B98064E16CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "template.data", "template.data\template.data.csproj", "{6AAB8AA9-A96A-44D8-9073-9B98064E16CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

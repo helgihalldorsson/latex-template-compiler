@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace latex.template.data
+namespace template.data
 {
     public class TemplateData
     {

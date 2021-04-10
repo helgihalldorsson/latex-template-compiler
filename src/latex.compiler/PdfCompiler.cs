@@ -10,7 +10,11 @@ namespace latex.compiler
     {
         public static void CompileLaTeX(string workingDirectory, string filePath, string auxDir = "auxiliary", string outputDir = "output")
         {
-            var fileInfo = new FileInfo(filePath);
+            if(!workingDirectory.EndsWith("\\"))
+            {
+                workingDirectory += "\\";
+            }
+            var fileInfo = new FileInfo(workingDirectory + filePath);
 
             if (!fileInfo.Exists)
             {

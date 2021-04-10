@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\latex.template.data\latex.template.data.csproj" />
+    <ProjectReference Include="..\template.data\template.data.csproj" />
   </ItemGroup>
 
 </Project>
