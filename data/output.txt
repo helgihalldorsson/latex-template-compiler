@@ -12,11 +12,15 @@
 
 Data:
 	Alpha:
-	<:alpha::><>,<>
-		(<:alpha:>)
-	<::alpha:>
+	
+		(ABC)
+	,
+		(DEF)
+	,
+		(GHI)
+	
 	Beta:
-		<:beta:>
+		X
 			
 Ætti að verða:
 

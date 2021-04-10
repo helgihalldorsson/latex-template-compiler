@@ -38,7 +38,16 @@ namespace latex.template.data.Nodes
             var latexTemplateParts = new List<string> { latexTemplate };
             foreach(string key in value.Keys)
             {
-                value[key].InputData(latexTemplateParts, $"{dataPath}:{key}");
+                string innerDataPath;
+                if(string.IsNullOrWhiteSpace(dataPath))
+                {
+                    innerDataPath = key;
+                }
+                else
+                {
+                    innerDataPath = $"{dataPath}:{key}";
+                }
+                value[key].InputData(latexTemplateParts, innerDataPath);
             }
 
             return latexTemplateParts;
