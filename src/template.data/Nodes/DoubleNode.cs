@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace template.data.Nodes
 {
-    public class StringNode : PrimitiveNode<string>
+    public class DoubleNode : PrimitiveNode<double>
     {
-        public StringNode(string value) : base(value) { }
+        public DoubleNode(double value) : base(value) { }
     }
+
 }

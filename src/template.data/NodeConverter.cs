@@ -20,17 +20,29 @@ namespace template.data
         {
             JToken token = JToken.ReadFrom(reader);
 
-            if (token.Type == JTokenType.String)
-            {
-                return new StringNode(token.ToString());
-            }
-            else if (token.Type == JTokenType.Object)
+            if (token.Type == JTokenType.Object)
             {
                 return ReadFromDictionary(token, serializer);
             }
             else if (token.Type == JTokenType.Array)
             {
                 return ReadFromList(token, serializer);
+            }
+            else if (token.Type == JTokenType.String)
+            {
+                return new StringNode(token.ToString());
+            }
+            else if (token.Type == JTokenType.Boolean)
+            {
+                return new BoolNode(token.ToObject<bool>());
+            }
+            else if (token.Type == JTokenType.Integer)
+            {
+                return new IntNode(token.ToObject<int>());
+            }
+            else if (token.Type == JTokenType.Float)
+            {
+                return new DoubleNode(token.ToObject<double>());
             }
             return null;
         }

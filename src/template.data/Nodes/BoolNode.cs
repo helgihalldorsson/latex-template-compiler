@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace template.data.Nodes
 {
-    public class StringNode : PrimitiveNode<string>
+    public class BoolNode: PrimitiveNode<bool>
     {
-        public StringNode(string value) : base(value) { }
+        public BoolNode(bool value) : base(value) { }
     }
 }
