@@ -8,6 +8,8 @@ namespace template.data
 {
     public interface INode
     {
-        public void InputData(List<string> latexTemplates, string dataPath);
+        public void InputData(List<string> latexTemplates, string dataPath, Settings settings);
+
+        public bool IgnoreNode(Settings settings);
     }
 }
