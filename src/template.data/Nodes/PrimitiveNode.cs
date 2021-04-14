@@ -28,7 +28,7 @@ namespace template.data.Nodes
             }
         }
 
-        private string InputData(string latexTemplate, string dataTag, Parameters settings)
+        private string InputData(string latexTemplate, string dataTag, Parameters parameters)
         {
             return latexTemplate.Replace(dataTag, value.ToString());
         }

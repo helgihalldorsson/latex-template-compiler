@@ -14,7 +14,7 @@ namespace template.data.Nodes
             this.value = value;
         }
 
-        public void InputData(List<string> latexTemplates, string dataPath, Parameters settings)
+        public void InputData(List<string> latexTemplates, string dataPath, Parameters parameters)
         {
             string dataTagBegin = $"<:{dataPath}::>";
 
@@ -23,7 +23,7 @@ namespace template.data.Nodes
             {
                 if (latexTemplates[i].Contains(dataTagBegin))
                 {
-                    List<string> templateWithData = InputData(latexTemplates[i], dataPath, settings);
+                    List<string> templateWithData = InputData(latexTemplates[i], dataPath, parameters);
                     if(templateWithData == null || templateWithData.Count == 0)
                     {
                         i++;
@@ -42,7 +42,7 @@ namespace template.data.Nodes
             }
         }
 
-        public bool IgnoreNode(Parameters settings)
+        public bool IgnoreNode(Parameters parameters)
         {
             return false;
         }

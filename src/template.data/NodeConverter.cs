@@ -72,7 +72,7 @@ namespace template.data
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Should never reach this function, as CanWrite always returns false.");
         }
     }
 }
