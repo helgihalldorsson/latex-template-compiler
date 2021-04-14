@@ -14,14 +14,14 @@ namespace template.data.Nodes
             this.value = value;
         }
 
-        public void InputData(List<string> latexTemplates, string dataPath, Settings settings)
+        public void InputData(List<string> latexTemplates, string dataPath, Parameters parameters)
         {
             int i = 0;
             while(i < latexTemplates.Count)
             {
                 if (latexTemplates[i].Contains($"<:{dataPath}:"))
                 {
-                    List<string> templateWithData = InputData(latexTemplates[i], dataPath, settings);
+                    List<string> templateWithData = InputData(latexTemplates[i], dataPath, parameters);
                     if(templateWithData != null && templateWithData.Count > 0)
                     {
                         latexTemplates.RemoveAt(i);
@@ -39,9 +39,9 @@ namespace template.data.Nodes
                 }
             }
         }
-        public bool IgnoreNode(Settings settings)
+        public bool IgnoreNode(Parameters parameters)
         {
-            if (settings.ignoreEnabled)
+            if (parameters.settings.ignoreEnabled)
             {
                 if (value.ContainsKey("ignore") && value["ignore"].GetType() == typeof(BoolNode))
                 {
@@ -53,7 +53,7 @@ namespace template.data.Nodes
         }
 
 
-        private List<string> InputData(string latexTemplate, string dataPath, Settings settings)
+        private List<string> InputData(string latexTemplate, string dataPath, Parameters settings)
         {
             var latexTemplateParts = new List<string> { latexTemplate };
 

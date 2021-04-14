@@ -14,7 +14,7 @@ namespace template.data.Nodes
             this.value = value;
         }
 
-        public void InputData(List<string> latexTemplates, string dataPath, Settings settings)
+        public void InputData(List<string> latexTemplates, string dataPath, Parameters settings)
         {
             string dataTagBegin = $"<:{dataPath}::>";
 
@@ -42,12 +42,12 @@ namespace template.data.Nodes
             }
         }
 
-        public bool IgnoreNode(Settings settings)
+        public bool IgnoreNode(Parameters settings)
         {
             return false;
         }
 
-        private List<string> InputData(string latexTemplate, string dataPath, Settings settings)
+        private List<string> InputData(string latexTemplate, string dataPath, Parameters parameters)
         {
             string dataTagBegin = $"<:{dataPath}::>";
 
@@ -73,12 +73,12 @@ namespace template.data.Nodes
             List<string> latexTemplateParts = new List<string> { frontPart };
             foreach (INode node in value)
             {
-                if(node.IgnoreNode(settings))
+                if(node.IgnoreNode(parameters))
                 {
                     continue;
                 }
                 List<string> itemTemplateParts = new List<string> { latexTemplate };
-                node.InputData(itemTemplateParts, dataPath, settings);
+                node.InputData(itemTemplateParts, dataPath, parameters);
                 latexTemplateParts.AddRange(itemTemplateParts);
                 latexTemplateParts.Add(divider);
             }
@@ -86,7 +86,7 @@ namespace template.data.Nodes
 
             if(backPart.Contains(dataTagBegin))
             {
-                List<string> backPartTemplateParts = InputData(backPart, dataPath, settings);
+                List<string> backPartTemplateParts = InputData(backPart, dataPath, parameters);
                 latexTemplateParts.AddRange(backPartTemplateParts);
             }
             else

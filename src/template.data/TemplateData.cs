@@ -16,10 +16,19 @@ namespace template.data
             return JsonConvert.DeserializeObject<TemplateData>(json, new NodeConverter());
         }
 
-        public string FillTemplate(string template)
+        public string FillTemplate(string template, Parameters parameters = null)
         {
+            if(parameters == null)
+            {
+                parameters = new Parameters();
+            }
+            if(parameters.settings != null)
+            {
+                parameters.settings = settings;
+            }
+
             List<string> templateParts = new List<string> { template };
-            data.InputData(templateParts, "", settings);
+            data.InputData(templateParts, "", parameters);
             return string.Join("", templateParts);
         }
     }
