@@ -12,10 +12,15 @@ namespace latex.compiler
             string template = File.ReadAllText(@"D:\Code\latex-template-compiler\data\template.tex");
 
             TemplateData data = TemplateData.Deserialize(json);
-            string result = data.FillTemplate(template);
-            File.WriteAllText(@"D:\Code\latex-template-compiler\data\latex.tex", result);
-            PdfCompiler.CompileLaTeX(@"D:\Code\latex-template-compiler\data\", "latex.tex");
-            Console.WriteLine("");
+            CompileLatex(template, data, @"D:\Code\latex-template-compiler\data\", "is");
+            CompileLatex(template, data, @"D:\Code\latex-template-compiler\data\", "en");
+        }
+
+        private static void CompileLatex(string template, TemplateData data, string path, string language)
+        {
+            string result = data.FillTemplate(template, language);
+            File.WriteAllText(@$"{path}\latex_{language}.tex", result);
+            PdfCompiler.CompileLaTeX(path, $"latex_{language}.tex");
         }
     }
 }

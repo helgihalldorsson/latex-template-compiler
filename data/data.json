@@ -1,11 +1,18 @@
 {
 	"settings": {
-		"ignoreEnabled": true
+		"ignoreEnabled": true, 
+		"supportedLanguages": [ "is", "en" ]
 	},
 	"data": {
 		"contactInfo": {
-			"name": "Helgi H", 
-			"phone": "12345", 
+			"name": {
+				"is": "Icelandic",
+				"en": "English"
+			},
+			"phone": {
+				"is": "800 ----", 
+				"en": "(+354) 800 ----"
+			},
 			"abc": 12.34, 
 			"yes": true
 		},
