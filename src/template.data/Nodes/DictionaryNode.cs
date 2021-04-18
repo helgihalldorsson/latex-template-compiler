@@ -51,7 +51,7 @@ namespace template.data.Nodes
         private bool CheckIfMultiLanguageNode(Parameters parameters)
         {
             // For a node to be a MultiLanguageNode, it must contain all supported languages as keys, and nothing else.
-
+   
             List<string> supportedLanguages = parameters.settings.supportedLanguages;
             if (supportedLanguages == null || supportedLanguages.Count == 0)
             {

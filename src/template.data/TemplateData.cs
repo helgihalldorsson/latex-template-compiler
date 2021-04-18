@@ -18,6 +18,11 @@ namespace template.data
 
         public string FillTemplate(string template, string selectedLanguage = null)
         {
+            if(settings == null)
+            {
+                settings = new Settings();
+            }
+
             var parameters = new Parameters { 
                 settings = settings, 
                 selectedLanguage = selectedLanguage 
