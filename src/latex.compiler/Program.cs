@@ -17,7 +17,11 @@ namespace latex.compiler
             string outputDir = @"D:\Code\latex-template-compiler\data\output";
             string dataPath = @"D:\Code\latex-template-compiler\data\data.json";
 
-            TemplateCompiler.Compile(templateDir, rootFile, outputDir, dataPath);
+            TemplateCompiler compiler = new TemplateCompiler(templateDir, rootFile, dataPath);
+            compiler.CleanUpAuxiliary = true;
+            compiler.CleanUpTemplate = true;
+            compiler.CleanUpSyncTex = true;
+            compiler.Compile(outputDir);
         }
     }
 }
