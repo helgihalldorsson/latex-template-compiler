@@ -4,11 +4,13 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using template.compiler.Exceptions;
 
 namespace template.compiler
 {
-    public class LatexCompiler
+    public class PdfLatex
     {
         public static void Compile(string workingDirectory, string rootFile, string auxDir = "auxiliary", string outputDir = "output")
         {
@@ -27,31 +29,27 @@ namespace template.compiler
                 throw new Exception($"File {rootFile} must be a .tex file.");
             }
             string argument = $"pdflatex.exe -synctex=1 -interaction=nonstopmode -aux-directory=\"{auxDir}\" -output-directory=\"{outputDir}\" \"{rootFile}\"";
-            string output = RunCmd(workingDirectory, argument);
-            Console.WriteLine(output);
+
+            Cmd cmd = new Cmd();
+            string output = cmd.Run(workingDirectory, argument);
+            ParseOutput(output, fileInfo);
         }
 
-        private static string RunCmd(string workingDirectory, string argument)
+        private static void ParseOutput(string output, FileInfo fileInfo)
         {
-            Process cmd = new Process();
-            cmd.StartInfo = new ProcessStartInfo
+            if(output.Contains("no output PDF file produced!"))
             {
-                WorkingDirectory = workingDirectory,
-                WindowStyle = ProcessWindowStyle.Hidden,
-                FileName = "cmd.exe",
-                RedirectStandardInput = true,
-                RedirectStandardOutput = true,
-                CreateNoWindow = true,
-                UseShellExecute = false
-            };
-            cmd.Start();
-            string output = null;// cmd.StandardOutput.ReadToEnd();
-            cmd.StandardInput.WriteLine(argument);
-            cmd.StandardInput.Flush();
-            cmd.StandardInput.Close();
-            cmd.WaitForExit();
-            cmd.Close();
-            return output;
+                if(output.Contains("Transcript written on "))
+                {
+                    var regexMessage = Regex.Match(output, @"(Transcript written on .*\.log\.)", RegexOptions.Singleline);
+                    if(regexMessage.Success)
+                    {
+                        string transcriptLocation = regexMessage.Groups[0].Value;
+                        transcriptLocation = transcriptLocation.Replace("\r\n", "").Replace("\n", "");
+                        throw new LatexException($"Error when compiling {fileInfo.FullName}. {transcriptLocation}");
+                    }
+                }
+            }
         }
     }
 }

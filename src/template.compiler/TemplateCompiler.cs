@@ -95,7 +95,7 @@ namespace template.compiler
         {
             DirectoryInfo outputTemplateDirInfo = outputDirInfo.CreateSubdirectory(templateDirectory);
             PrepareTemplateDirectory(templateDir, outputTemplateDirInfo, Data, selectedLanguage);
-            LatexCompiler.Compile(outputTemplateDirInfo.FullName, rootFile, auxDir: auxiliaryDirectory, outputDir: outputDirectory);
+            PdfLatex.Compile(outputTemplateDirInfo.FullName, rootFile, auxDir: auxiliaryDirectory, outputDir: outputDirectory);
             CleanUp(outputTemplateDirInfo);
         }
 
