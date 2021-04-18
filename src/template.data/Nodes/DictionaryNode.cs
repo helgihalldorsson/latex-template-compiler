@@ -21,7 +21,13 @@ namespace template.data.Nodes
             int i = 0;
             while(i < latexTemplates.Count)
             {
-                if (latexTemplates[i].Contains($"<:{dataPath}:"))
+                string dataPathKeyStart = $"<:{dataPath}:";
+                if(string.IsNullOrWhiteSpace(dataPath))
+                {
+                    dataPathKeyStart = "<:";
+                }
+
+                if (latexTemplates[i].Contains(dataPathKeyStart))
                 {
                     List<string> templateWithData = InputData(latexTemplates[i], dataPath, parameters);
                     if(templateWithData != null && templateWithData.Count > 0)
