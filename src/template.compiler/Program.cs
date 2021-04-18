@@ -1,8 +1,9 @@
-﻿using template.data;
+﻿using latex.compiler;
 using System;
 using System.IO;
+using template.data;
 
-namespace latex.compiler
+namespace template.compiler
 {
     class Program
     {
@@ -20,7 +21,7 @@ namespace latex.compiler
         {
             string result = data.FillTemplate(template, language);
             File.WriteAllText(@$"{path}\latex_{language}.tex", result);
-            PdfCompiler.CompileLaTeX(path, $"latex_{language}.tex");
+            LatexCompiler.Compile(path, $"latex_{language}.tex");
         }
     }
 }

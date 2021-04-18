@@ -6,9 +6,9 @@ using System.Text;
 
 namespace latex.compiler
 {
-    class PdfCompiler
+    public class LatexCompiler
     {
-        public static void CompileLaTeX(string workingDirectory, string filePath, string auxDir = "auxiliary", string outputDir = "output")
+        public static void Compile(string workingDirectory, string filePath, string auxDir = "auxiliary", string outputDir = "output")
         {
             if(!workingDirectory.EndsWith("\\"))
             {
@@ -25,10 +25,11 @@ namespace latex.compiler
                 throw new Exception($"File {filePath} must be a .tex file.");
             }
             string argument = $"pdflatex.exe -synctex=1 -interaction=nonstopmode -aux-directory=\"{auxDir}\" -output-directory=\"{outputDir}\" \"{filePath}\"";
-            RunCmd(workingDirectory, argument);
+            string output = RunCmd(workingDirectory, argument);
+            Console.WriteLine(output);
         }
 
-        private static void RunCmd(string workingDirectory, string argument)
+        private static string RunCmd(string workingDirectory, string argument)
         {
             Process cmd = new Process();
             cmd.StartInfo = new ProcessStartInfo
@@ -42,11 +43,13 @@ namespace latex.compiler
                 UseShellExecute = false
             };
             cmd.Start();
+            string output = cmd.StandardOutput.ReadToEnd();
             cmd.StandardInput.WriteLine(argument);
             cmd.StandardInput.Flush();
             cmd.StandardInput.Close();
             cmd.WaitForExit();
             cmd.Close();
+            return output;
         }
     }
 }
