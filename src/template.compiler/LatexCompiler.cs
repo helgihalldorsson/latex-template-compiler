@@ -2,29 +2,31 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace latex.compiler
+namespace template.compiler
 {
     public class LatexCompiler
     {
-        public static void Compile(string workingDirectory, string filePath, string auxDir = "auxiliary", string outputDir = "output")
+        public static void Compile(string workingDirectory, string rootFile, string auxDir = "auxiliary", string outputDir = "output")
         {
-            if(!workingDirectory.EndsWith("\\"))
+            if (!workingDirectory.EndsWith("\\"))
             {
                 workingDirectory += "\\";
             }
-            var fileInfo = new FileInfo(workingDirectory + filePath);
+            var fileInfo = new FileInfo(workingDirectory + rootFile);
 
             if (!fileInfo.Exists)
             {
-                throw new Exception($"File {filePath} could not be found.");
+                throw new Exception($"File {rootFile} could not be found.");
             }
-            if (!filePath.EndsWith(".tex"))
+            if (!rootFile.EndsWith(".tex"))
             {
-                throw new Exception($"File {filePath} must be a .tex file.");
+                throw new Exception($"File {rootFile} must be a .tex file.");
             }
-            string argument = $"pdflatex.exe -synctex=1 -interaction=nonstopmode -aux-directory=\"{auxDir}\" -output-directory=\"{outputDir}\" \"{filePath}\"";
+            string argument = $"pdflatex.exe -synctex=1 -interaction=nonstopmode -aux-directory=\"{auxDir}\" -output-directory=\"{outputDir}\" \"{rootFile}\"";
             string output = RunCmd(workingDirectory, argument);
             Console.WriteLine(output);
         }
@@ -43,7 +45,7 @@ namespace latex.compiler
                 UseShellExecute = false
             };
             cmd.Start();
-            string output = cmd.StandardOutput.ReadToEnd();
+            string output = null;// cmd.StandardOutput.ReadToEnd();
             cmd.StandardInput.WriteLine(argument);
             cmd.StandardInput.Flush();
             cmd.StandardInput.Close();
