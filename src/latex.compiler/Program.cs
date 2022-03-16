@@ -12,15 +12,12 @@ namespace latex.compiler
     {
         static void Main(string[] args)
         {
-            string templateDir = @"D:\Code\latex-template-compiler\data\template";
+            string templateDir = @"D:\Code\latex-template-compiler\example\template";
             string rootFile = @"template.tex";
-            string outputDir = @"D:\Code\latex-template-compiler\data\output";
-            string dataPath = @"D:\Code\latex-template-compiler\data\data.json";
+            string outputDir = @"D:\Code\latex-template-compiler\example\output";
+            string dataPath = @"D:\Code\latex-template-compiler\example\data.json";
 
-            TemplateCompiler compiler = new TemplateCompiler(templateDir, rootFile, dataPath);
-            compiler.CleanUpAuxiliary = true;
-            compiler.CleanUpTemplate = true;
-            compiler.CleanUpSyncTex = true;
+            TemplateCompiler compiler = new TemplateCompiler(templateDir, rootFile, dataPath, cleanUpAuxiliary: true, cleanUpTemplate: true, cleanUpSyncTex: true);
             compiler.Compile(outputDir);
         }
     }
