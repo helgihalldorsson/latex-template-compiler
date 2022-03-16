@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace template.data.Nodes
     public class PrimitiveNode<T> : INode
     {
         protected T value;
+
         public PrimitiveNode(T value)
         {
             this.value = value;
@@ -30,7 +32,12 @@ namespace template.data.Nodes
 
         private string InputData(string latexTemplate, string dataTag, Parameters parameters)
         {
-            return latexTemplate.Replace(dataTag, value.ToString());
+            return latexTemplate.Replace(dataTag, GetValueAsString());
+        }
+
+        protected virtual string GetValueAsString()
+        {
+            return value.ToString();
         }
     }
 }
