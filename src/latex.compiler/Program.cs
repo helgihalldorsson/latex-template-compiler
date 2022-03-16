@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Text;
-using template.compiler;
-using template.data;
+﻿using template.compiler;
 
 namespace latex.compiler
 {
